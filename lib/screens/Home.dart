@@ -5,6 +5,9 @@ import 'package:security/widgets/CardGreetingStack.dart';
 import 'package:security/widgets/IconWithText.dart';
 import 'package:security/widgets/ProfileGreeting.dart';
 
+
+//initial start class 2nd
+
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
