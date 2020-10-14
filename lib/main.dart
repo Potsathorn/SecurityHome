@@ -6,6 +6,7 @@ import 'package:security/screens/IntrusionShow.dart';
 import 'package:security/screens/Lightning.dart';
 import 'package:security/screens/RemoteLocking.dart';
 import 'package:security/screens/VideoStreaming.dart';
+import 'package:security/screens/testslide.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(),
+      home: CarouselDemo(),
       routes: {
         '/showHome_page': (context) => HomePage(),
         '/showAttendance_page': (context) => AttendancePage(),
