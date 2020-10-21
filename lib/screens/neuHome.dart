@@ -55,6 +55,7 @@ class _NeuHomeState extends State<NeuHome> {
   void initState() {
     super.initState();
     readData();
+    //test();
   }
 
   void writeData() {
@@ -62,6 +63,89 @@ class _NeuHomeState extends State<NeuHome> {
       'id': 'Test1',
       'data': 'This is a test send data from App to Firebase'
     });
+  }
+
+  void realtime() {
+    bdref.child('Security Light').onValue.listen((event) {
+      var snapshot = event.snapshot;
+
+      String value = snapshot.value['Light'];
+      print('Value is $value');
+
+      (value == 'On') ? isOn = true : isOn = false;
+      setState(() {
+        
+      });
+
+      //
+    });
+
+    bdref.child('Remote Locking').onValue.listen((event) {
+      var snapshot = event.snapshot;
+
+      String value = snapshot.value['Door'];
+      print('Value is $value');
+
+      (value == 'Lock') ? isLocked = true : isLocked = false;
+
+      //
+    });
+
+    bdref.child('Sound Alarm').onValue.listen((event) {
+      var snapshot = event.snapshot;
+
+      String value = snapshot.value['Alert'];
+      print('Value is $value');
+
+      (value == 'Active') ? isActived = true : isActived = false;
+
+      //
+    });
+
+
+    // bdref.child('Intrusion Detection').onValue.listen((event) {
+    //   var snapshot = event.snapshot;
+
+    //   String value = snapshot.value['Motion'];
+    //   print('Value is $value');
+
+    //   (value == 'Normal') ? noMotion = true : noMotion = false;
+
+    //   //
+    // });
+
+    // bdref.child('Intrusion Detection').onValue.listen((event) {
+    //   var snapshot = event.snapshot;
+
+    //   String value = snapshot.value['Vibration'];
+    //   print('Value is $value');
+
+    //   (value == 'Normal') ? noVibration = true : noVibration = false;
+
+    //   //
+    // });
+
+    // bdref.child('Intrusion Detection').onValue.listen((event) {
+    //   var snapshot = event.snapshot;
+
+    //   String value = snapshot.value['Contact'];
+    //   print('Value is $value');
+
+    //   (value == 'Normal') ? noContact = true : noContact = false;
+
+    //   //
+    // });
+
+
+
+  
+
+   
+
+    
+
+
+
   }
 
   void readData() {
@@ -85,6 +169,8 @@ class _NeuHomeState extends State<NeuHome> {
       (realTimeData['Intrusion Detection']['Contact'] == 'Normal')
           ? noContact = true
           : noContact = false;
+
+      //print('1Update Value is ${realTimeData['Security Light']['Light']}');
 
       (noContact) ? progressValueshow += 40 : progressValueshow += 2;
       (noVibration) ? progressValueshow += 40 : progressValueshow += 2;
@@ -224,6 +310,7 @@ class _NeuHomeState extends State<NeuHome> {
   // }
 
   _NeuHomeState() {
+    //test();
     _timer = Timer.periodic(const Duration(milliseconds: 5), (Timer _timer) {
       setState(() {
         progressValue++;
@@ -242,6 +329,7 @@ class _NeuHomeState extends State<NeuHome> {
 
   @override
   Widget build(BuildContext context) {
+    realtime();
     // String motion = realTimeData['Intrusion Detection']['Motion'];
     // String vibration = realTimeData['Intrusion Detection']['Vibration'];
     // String contact = realTimeData['Intrusion Detection']['Contact'];
@@ -461,15 +549,27 @@ class _NeuHomeState extends State<NeuHome> {
               ],
             ),
             trailing: (groupScene != null)
-                ? Text(groupScene, //trow Excep debug
-                    style: TextStyle(
-                      // letterSpacing: 1.5,
-                      fontSize: 20.0,
-                      color: Colors.cyan,
-                      fontWeight: FontWeight.bold,
-                      // fontWeight: FontWeight.bold,
-                      // fontFamily: "nunito",
-                    ))
+                ? Neumorphic(
+                    style: NeumorphicStyle(
+                        // boxShape: NeumorphicBoxShape.circle(),
+                        //  shape: NeumorphicShape.concave
+                        ),
+                    child: Container(
+                      color: Color(0xFFe6ebf2),
+                      child: Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: Text(groupScene, //trow Excep debug
+                            style: TextStyle(
+                              // letterSpacing: 1.5,
+                              fontSize: 20.0,
+                              color: Colors.cyan,
+                              fontWeight: FontWeight.bold,
+                              // fontWeight: FontWeight.bold,
+                              // fontFamily: "nunito",
+                            )),
+                      ),
+                    ),
+                  )
                 : Text(''),
           ),
           SizedBox(
@@ -517,7 +617,7 @@ class _NeuHomeState extends State<NeuHome> {
                               boxShape: NeumorphicBoxShape.circle(),
                               shape: NeumorphicShape.convex),
                           child: Container(
-                            color:Color(0xFFe6ebf2),
+                            color: Color(0xFFe6ebf2),
                             width: 30,
                             height: 30,
                             child: Icon(
@@ -634,7 +734,7 @@ class _NeuHomeState extends State<NeuHome> {
                   ),
                   Neumorphic(
                     style: NeumorphicStyle(
-                       // boxShape: NeumorphicBoxShape.circle(),
+                        // boxShape: NeumorphicBoxShape.circle(),
                         shape: NeumorphicShape.convex),
                     child: Container(
                         height: 120,
@@ -946,7 +1046,7 @@ class _NeuHomeState extends State<NeuHome> {
                         height: 5.0,
                       ),
                       Icon(
-                        SimpleLineIcons.volume_2,
+                        Icons.notifications_active_outlined,
                         color: Colors.black.withOpacity(.5),
                       ),
                       SizedBox(
