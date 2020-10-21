@@ -29,37 +29,44 @@ class LightningControl extends StatelessWidget {
               Positioned(
                 right: 40,
                 bottom: 60,
-               child: _bumpCircle('https://png.pngtree.com/png-vector/20190820/ourlarge/pngtree-light-bulb-icon-vector--light-bulb-ideas-symbol-illustration-png-image_1694700.jpg'),
+                child: _bumpCircle(
+                    'https://png.pngtree.com/png-vector/20190820/ourlarge/pngtree-light-bulb-icon-vector--light-bulb-ideas-symbol-illustration-png-image_1694700.jpg'),
               ),
               Positioned(
                 left: 150,
                 bottom: 60,
-               child: _bumpCircle('https://png.pngtree.com/png-vector/20190820/ourlarge/pngtree-light-bulb-icon-vector--light-bulb-ideas-symbol-illustration-png-image_1694700.jpg'),
+                child: _bumpCircle(
+                    'https://png.pngtree.com/png-vector/20190820/ourlarge/pngtree-light-bulb-icon-vector--light-bulb-ideas-symbol-illustration-png-image_1694700.jpg'),
               ),
               Positioned(
-                left: 150,
-                bottom: 200,
-               child: _bumpCircle('https://cdn.pixabay.com/photo/2018/09/04/19/47/light-bulb-3654558_960_720.jpg'),
-              ),
-              Positioned(
-                right: 60,
-                top: 220,
-               child: _bumpCircle('https://cdn.pixabay.com/photo/2018/09/04/19/47/light-bulb-3654558_960_720.jpg'),
-              ),
-              Positioned(
-                left: 190,
-                top: 240,
-               child: _bumpCircle('https://cdn.pixabay.com/photo/2018/09/04/19/47/light-bulb-3654558_960_720.jpg'),
-              ),
-              Positioned(
-                left: 150,
-                top: 100,
-               child: _bumpCircle('https://cdn.pixabay.com/photo/2018/09/04/19/47/light-bulb-3654558_960_720.jpg'),
+                left: 160,
+                top: 195,
+                child: _bumpCircle(
+                    'https://cdn.pixabay.com/photo/2018/09/04/19/47/light-bulb-3654558_960_720.jpg'),
               ),
               Positioned(
                 right: 60,
-                bottom: 200,
-               child: _bumpCircle('https://cdn.pixabay.com/photo/2018/09/04/19/47/light-bulb-3654558_960_720.jpg'),
+                top: 160,
+                child: _bumpCircle(
+                    'https://cdn.pixabay.com/photo/2018/09/04/19/47/light-bulb-3654558_960_720.jpg'),
+              ),
+              Positioned(
+                left: 110,
+                top: 260,
+                child: _bumpCircle(
+                    'https://cdn.pixabay.com/photo/2018/09/04/19/47/light-bulb-3654558_960_720.jpg'),
+              ),
+              Positioned(
+                left: 130,
+                top: 80,
+                child: _bumpCircle(
+                    'https://cdn.pixabay.com/photo/2018/09/04/19/47/light-bulb-3654558_960_720.jpg'),
+              ),
+              Positioned(
+                right: 60,
+                bottom: 180,
+                child: _bumpCircle(
+                    'https://cdn.pixabay.com/photo/2018/09/04/19/47/light-bulb-3654558_960_720.jpg'),
               ),
             ],
           ),

@@ -1,8 +1,7 @@
+import 'package:Security/constants.dart';
+import 'package:Security/widgets/Logo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../constans.dart';
-import 'Logo.dart';
 
 ///import 'package:flutter/material.dart';
 

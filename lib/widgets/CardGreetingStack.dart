@@ -1,20 +1,18 @@
+import 'package:Security/widgets/IconWithText.dart';
+import 'package:Security/widgets/ProfileGreeting.dart';
+import 'package:Security/widgets/toggleScene.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-
-import 'IconWithText.dart';
-import 'ProfileGreeting.dart';
 
 class CardGreetingStack extends StatelessWidget {
   void tt() {}
   final String urlImage;
   final ProfileGreeting profile;
-  //final ToggleScene sceneChoosed;
+  
 
   const CardGreetingStack(
       {@required this.urlImage,
       @required this.profile,
-     // @required this.sceneChoosed
       })
       : assert(urlImage != null),
         assert(profile != null);

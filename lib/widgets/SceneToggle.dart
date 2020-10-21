@@ -1,7 +1,5 @@
-
+import 'package:Security/widgets/IconWithText.dart';
 import 'package:flutter/material.dart';
-
-import 'IconWithText.dart';
 
 enum WidgetMarker { graph, stats, info }
 

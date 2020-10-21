@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constans.dart';
-
+import '../constants.dart';
 import 'Logo.dart';
 
 class Header extends StatelessWidget {
@@ -31,6 +30,7 @@ class Header extends StatelessWidget {
                 Theme.of(context).textTheme.subtitle1.copyWith(color: kWhite),
           ),
         ),
+        
       ],
     );
   }

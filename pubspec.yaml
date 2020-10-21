@@ -1,4 +1,4 @@
-name: security
+name: Security
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -21,20 +21,28 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  flutter_neumorphic:
-  carousel_slider: ^1.3.0
-  flutter_icons:
   flutter:
     sdk: flutter
-  
-  
+  toggle_switch: 
+  web_socket_channel:
+  gesture_zoom_box:
+  save_in_gallery:
+  flutter_speed_dial:
+  intl:
+  fluttertoast:
+  passcode_screen:
+  flutter_neumorphic:
+  flutter_icons:
+  syncfusion_flutter_gauges:
+  carousel_slider:
+
+  firebase_core:
+  firebase_database:
 
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
-  neumorphic: ^0.4.0
-  
 
 dev_dependencies:
   flutter_test:

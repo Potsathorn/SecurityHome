@@ -1,17 +1,10 @@
+import 'package:Security/widgets/AppBarHome.dart';
+import 'package:Security/widgets/CardGreetingStack.dart';
+import 'package:Security/widgets/IconWithText.dart';
+import 'package:Security/widgets/ProfileGreeting.dart';
+import 'package:Security/widgets/toggleScene.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:security/widgets/AppBarHome.dart';
-import 'package:security/widgets/CardGreetingStack.dart';
-import 'package:security/widgets/IconWithText.dart';
-import 'package:security/widgets/ProfileGreeting.dart';
-
-
-//initial start class 2nd
-
-
-
-//initial start class 3rd commit
-
 
 class HomePage extends StatelessWidget {
   @override
@@ -147,26 +140,17 @@ class HomePage extends StatelessWidget {
                         gotoPage: _gotoLockink),
                   ),
                   Container(
-                    height: 90,
                     width: (MediaQuery.of(context).size.width / 2) - 15,
                     decoration: BoxDecoration(
                         border: Border.all(width: 2, color: Colors.blue[300]),
                         borderRadius: BorderRadius.all(
                           Radius.circular(20),
                         )),
-                    child: Row(children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Icon(Icons.lightbulb_outline),
-                           Text('Security '),
-                          Text('2/5 Device'),
-                          Text('::::::::::::::'),
-                        ],
-                      ),
-                      Icon(Icons.lightbulb_outline,size: 90,
-                      )
-                    ],),
+                    child: IconWithText(
+                        icon: Icons.lightbulb_outline,
+                        size: 130,
+                        iconName: 'Security Lightning',
+                        gotoPage: _gotoLightnig),
                   )
                 ],
               ),

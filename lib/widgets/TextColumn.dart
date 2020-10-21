@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constans.dart';
-
+import '../constants.dart';
 
 class TextColumn extends StatelessWidget {
   final String title;

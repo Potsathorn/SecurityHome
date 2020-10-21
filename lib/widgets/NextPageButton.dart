@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constans.dart';
-
+import '../constants.dart';
 
 class NextPageButton extends StatelessWidget {
   final VoidCallback onPressed;

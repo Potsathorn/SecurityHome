@@ -1,7 +1,6 @@
-
+import 'package:Security/widgets/CircleIcon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:security/widgets/CircleIcon.dart';
 
 class RemoteLockingPage extends StatelessWidget {
   @override
