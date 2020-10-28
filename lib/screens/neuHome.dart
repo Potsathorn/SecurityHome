@@ -8,6 +8,7 @@ import 'package:Security/widgets/neuCircleimg.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
@@ -16,6 +17,7 @@ import 'package:Security/widgets/circle.dart';
 import 'package:Security/widgets/keyboard.dart';
 import 'package:Security/screens/PassCode.dart';
 
+import '../SceneCubit.dart';
 import 'PassCode.dart';
 
 class NeuHome extends StatefulWidget {
@@ -29,8 +31,17 @@ class _NeuHomeState extends State<NeuHome> {
       StreamController<bool>.broadcast();
   bool isAuthenticated = false;
 
-  void _gotoHome() {
-    Navigator.pushNamed(context, "/showHome_page");
+ 
+  void _gotoCamera() {
+      Navigator.pushNamed(context, "/showCamera_page");
+    }
+
+    void _gotoIntrusion() {
+      Navigator.pushNamed(context, "/showIntrusion_page");
+    }
+
+  void _gotoAttendance() {
+    Navigator.pushNamed(context, "/showAttendance_page");
   }
 
   bool isActived = false;
@@ -70,12 +81,10 @@ class _NeuHomeState extends State<NeuHome> {
       var snapshot = event.snapshot;
 
       String value = snapshot.value['Light'];
-      print('Value is $value');
+      // print('Value is $value');
 
       (value == 'On') ? isOn = true : isOn = false;
-      setState(() {
-        
-      });
+      setState(() {});
 
       //
     });
@@ -84,7 +93,7 @@ class _NeuHomeState extends State<NeuHome> {
       var snapshot = event.snapshot;
 
       String value = snapshot.value['Door'];
-      print('Value is $value');
+      //print('Value is $value');
 
       (value == 'Lock') ? isLocked = true : isLocked = false;
 
@@ -95,13 +104,12 @@ class _NeuHomeState extends State<NeuHome> {
       var snapshot = event.snapshot;
 
       String value = snapshot.value['Alert'];
-      print('Value is $value');
+      // print('Value is $value');
 
       (value == 'Active') ? isActived = true : isActived = false;
 
       //
     });
-
 
     // bdref.child('Intrusion Detection').onValue.listen((event) {
     //   var snapshot = event.snapshot;
@@ -135,17 +143,6 @@ class _NeuHomeState extends State<NeuHome> {
 
     //   //
     // });
-
-
-
-  
-
-   
-
-    
-
-
-
   }
 
   void readData() {
@@ -171,6 +168,7 @@ class _NeuHomeState extends State<NeuHome> {
           : noContact = false;
 
       //print('1Update Value is ${realTimeData['Security Light']['Light']}');
+    
 
       (noContact) ? progressValueshow += 40 : progressValueshow += 2;
       (noVibration) ? progressValueshow += 40 : progressValueshow += 2;
@@ -297,17 +295,17 @@ class _NeuHomeState extends State<NeuHome> {
 
   ///////===
 
-  // void _gotoLockink() {
-  //   Navigator.pushNamed(context, "/showLocking_page");
-  // }
+  void _gotoLockink() {
+    Navigator.pushNamed(context, "/showLocking_page");
+  }
 
-  // void _gotoLightnig() {
-  //   Navigator.pushNamed(context, "/showLightning_page");
-  // }
+  void _gotoLightnig() {
+    Navigator.pushNamed(context, "/showLightning_page");
+  }
 
-  // void _gotoAlarm() {
-  //   Navigator.pushNamed(context, "/showAlarm_page");
-  // }
+  void _gotoAlarm() {
+    Navigator.pushNamed(context, "/showAlarm_page");
+  }
 
   _NeuHomeState() {
     //test();
@@ -444,13 +442,14 @@ class _NeuHomeState extends State<NeuHome> {
                       shape: NeumorphicShape.convex),
                   value: "Coming Home",
                   onChanged: (value) {
+                    context.bloc<SceneCubit>().scenetoggle(value);
                     setState(() {
                       groupScene = value;
                     });
                   },
                   child: Container(
                       color: (groupScene == 'Coming Home')
-                          ? Colors.cyan
+                          ?  ( (progressValueshow > 40) ? Colors.cyan : Color(0xFFd51a00))
                           : Color(0xFFe6ebf2),
                       height: 40,
                       width: 40,
@@ -472,13 +471,14 @@ class _NeuHomeState extends State<NeuHome> {
                       shape: NeumorphicShape.convex),
                   value: "Going Out",
                   onChanged: (value) {
+                    context.bloc<SceneCubit>().scenetoggle(value);
                     setState(() {
                       groupScene = value;
                     });
                   },
                   child: Container(
                       color: (groupScene == 'Going Out')
-                          ? Colors.cyan
+                          ? (progressValueshow > 40) ? Colors.cyan : Color(0xFFd51a00)
                           : Color(0xFFe6ebf2),
                       height: 40,
                       width: 40,
@@ -500,13 +500,14 @@ class _NeuHomeState extends State<NeuHome> {
                       shape: NeumorphicShape.convex),
                   value: "Watch Over",
                   onChanged: (value) {
+                    context.bloc<SceneCubit>().scenetoggle(value);
                     setState(() {
                       groupScene = value;
                     });
                   },
                   child: Container(
                       color: (groupScene == 'Watch Over')
-                          ? Colors.cyan
+                          ? (progressValueshow > 40) ? Colors.cyan : Color(0xFFd51a00)
                           : Color(0xFFe6ebf2),
                       height: 40,
                       width: 40,
@@ -528,13 +529,14 @@ class _NeuHomeState extends State<NeuHome> {
                       shape: NeumorphicShape.convex),
                   value: "Good Night",
                   onChanged: (value) {
+                    context.bloc<SceneCubit>().scenetoggle(value);
                     setState(() {
                       groupScene = value;
                     });
                   },
                   child: Container(
                       color: (groupScene == 'Good Night')
-                          ? Colors.cyan
+                          ? (progressValueshow > 40) ? Colors.cyan : Color(0xFFd51a00)
                           : Color(0xFFe6ebf2),
                       height: 40,
                       width: 40,
@@ -558,15 +560,29 @@ class _NeuHomeState extends State<NeuHome> {
                       color: Color(0xFFe6ebf2),
                       child: Padding(
                         padding: const EdgeInsets.all(3.0),
-                        child: Text(groupScene, //trow Excep debug
-                            style: TextStyle(
-                              // letterSpacing: 1.5,
-                              fontSize: 20.0,
-                              color: Colors.cyan,
-                              fontWeight: FontWeight.bold,
-                              // fontWeight: FontWeight.bold,
-                              // fontFamily: "nunito",
-                            )),
+                        child: BlocBuilder<SceneCubit, String>(
+                          builder: (context, state) {
+                            return Text(state, //trow Excep debug
+                                style: TextStyle(
+                                  // letterSpacing: 1.5,
+                                  fontSize: 20.0,
+                                  color: (progressValueshow > 40) ? Colors.cyan : Color(0xFFd51a00),
+                                  fontWeight: FontWeight.bold,
+                                  // fontWeight: FontWeight.bold,
+                                  // fontFamily: "nunito",
+                                ));
+                          },
+                        ),
+
+                        // Text(groupScene, //trow Excep debug
+                        //     style: TextStyle(
+                        //       // letterSpacing: 1.5,
+                        //       fontSize: 20.0,
+                        //       color: Colors.cyan,
+                        //       fontWeight: FontWeight.bold,
+                        //       // fontWeight: FontWeight.bold,
+                        //       // fontFamily: "nunito",
+                        //     )),
                       ),
                     ),
                   )
@@ -619,11 +635,14 @@ class _NeuHomeState extends State<NeuHome> {
                           child: Container(
                             color: Color(0xFFe6ebf2),
                             width: 30,
-                            height: 30,
-                            child: Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              color: Colors.cyan,
-                              size: 20,
+                            height: 25,
+                            child: GestureDetector(
+                              onTap: () => _gotoAttendance(),
+                              child: Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                color: (progressValueshow > 40) ? Colors.cyan : Color(0xFFd51a00),
+                                size: 20,
+                              ),
                             ),
                           ),
                         ),
@@ -643,156 +662,159 @@ class _NeuHomeState extends State<NeuHome> {
           SizedBox(
             height: 15.0,
           ),
-          Neumorphic(
-            child: Container(
-              color: Color(0xFFe6ebf2),
-              width: MediaQuery.of(context).size.width - 20,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          // Icon(
-                          //   FontAwesome.do,
-                          //   color: Colors.cyan,
-                          //   size: 35,
-                          // ),
-                          // SizedBox(
-                          //   width: 10.0,
-                          // ),
-                          // Icon(
-                          //   FontAwesome.shield,
-                          //   color: Colors.cyan,
-                          //   size: 35,
-                          // ),
-                          // SizedBox(
-                          //   width: 10.0,
-                          // ),
-                          Icon(
-                            Icons.security_outlined,
-                            color: Colors.cyan,
-                            size: 35,
-                          ),
-                        ],
-                      ),
-                      // Neumorphic(
-                      //   style: NeumorphicStyle(
-                      //       //boxShape: NeumorphicBoxShape.circle(),
-                      //       shape: NeumorphicShape.concave),
-                      //   child: Container(
-                      //       width: 30.0,
-                      //       height: 30.0,
-                      //       child: Icon(
-                      //         FontAwesome.shield,
-                      //         color: Colors.cyan,
-                      //       )),
-                      // ),
-                      Row(
-                        children: [
-                          Text(
-                            'Intrusion Detection',
-                            style: TextStyle(
-                              color: Colors.black.withOpacity(.5),
-                              letterSpacing: 1,
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "nunito",
+          GestureDetector(
+            onTap: () =>  _gotoIntrusion() ,
+                      child: Neumorphic(
+              child: Container(
+                color: Color(0xFFe6ebf2),
+                width: MediaQuery.of(context).size.width - 20,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            // Icon(
+                            //   FontAwesome.do,
+                            //   color: Colors.cyan,
+                            //   size: 35,
+                            // ),
+                            // SizedBox(
+                            //   width: 10.0,
+                            // ),
+                            // Icon(
+                            //   FontAwesome.shield,
+                            //   color: Colors.cyan,
+                            //   size: 35,
+                            // ),
+                            // SizedBox(
+                            //   width: 10.0,
+                            // ),
+                            Icon(
+                              Icons.security_outlined,
+                              color: (progressValueshow > 40) ? Colors.cyan : Color(0xFFd51a00),
+                              size: 35,
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 5.0,
-                      ),
-                      Text(
-                        statusSecurityDes,
-                        style: TextStyle(
-                          color: Colors.black.withOpacity(.5),
-                          letterSpacing: 1,
-                          fontSize: 15.0,
-                          // fontWeight: FontWeight.bold,
-                          fontFamily: "nunito",
+                          ],
                         ),
-                      ),
-                      SizedBox(
-                        height: 5.0,
-                      ),
-                      Text(
-                        statusSecurity,
-                        style: TextStyle(
-                          color: Colors.cyan,
-                          letterSpacing: 1,
-                          fontSize: 25.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "nunito",
-                        ),
-                      ),
-                    ],
-                  ),
-                  Neumorphic(
-                    style: NeumorphicStyle(
-                        // boxShape: NeumorphicBoxShape.circle(),
-                        shape: NeumorphicShape.convex),
-                    child: Container(
-                        height: 120,
-                        width: 120,
-                        color: Color(0xFFe6ebf2),
-                        child: SfRadialGauge(axes: <RadialAxis>[
-                          RadialAxis(
-                              showLabels: false,
-                              showTicks: false,
-                              startAngle: 270,
-                              endAngle: 270,
-                              radiusFactor: 0.8,
-                              axisLineStyle: AxisLineStyle(
-                                thickness: 0.2,
-                                color: const Color.fromARGB(30, 0, 169, 181),
-                                thicknessUnit: GaugeSizeUnit.factor,
-                                cornerStyle: CornerStyle.startCurve,
+                        // Neumorphic(
+                        //   style: NeumorphicStyle(
+                        //       //boxShape: NeumorphicBoxShape.circle(),
+                        //       shape: NeumorphicShape.convex),
+                        //   child: Container(
+                        //       width: 30.0,
+                        //       height: 30.0,
+                        //       child: Icon(
+                        //         Icons.security_outlined,
+                        //         color: Colors.cyan,
+                        //       )),
+                        // ),
+                        Row(
+                          children: [
+                            Text(
+                              'Intrusion Detection',
+                              style: TextStyle(
+                                color: Colors.black.withOpacity(.5),
+                                letterSpacing: 1,
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "nunito",
                               ),
-                              pointers: <GaugePointer>[
-                                RangePointer(
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                        Text(
+                          statusSecurityDes,
+                          style: TextStyle(
+                            color: Colors.black.withOpacity(.5),
+                            letterSpacing: 1,
+                            fontSize: 15.0,
+                            // fontWeight: FontWeight.bold,
+                            fontFamily: "nunito",
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                        Text(
+                          statusSecurity,
+                          style: TextStyle(
+                            color: (progressValueshow > 40) ? Colors.cyan : Color(0xFFd51a00),
+                            letterSpacing: 1,
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "nunito",
+                          ),
+                        ),
+                      ],
+                    ),
+                    Neumorphic(
+                      style: NeumorphicStyle(
+                          // boxShape: NeumorphicBoxShape.circle(),
+                          shape: NeumorphicShape.convex),
+                      child: Container(
+                          height: 120,
+                          width: 120,
+                          color: Color(0xFFe6ebf2),
+                          child: SfRadialGauge(axes: <RadialAxis>[
+                            RadialAxis(
+                                showLabels: false,
+                                showTicks: false,
+                                startAngle: 270,
+                                endAngle: 270,
+                                radiusFactor: 0.8,
+                                axisLineStyle: AxisLineStyle(
+                                  thickness: 0.2,
+                                  color: const Color.fromARGB(30, 0, 169, 181),
+                                  thicknessUnit: GaugeSizeUnit.factor,
+                                  cornerStyle: CornerStyle.startCurve,
+                                ),
+                                pointers: <GaugePointer>[
+                                  RangePointer(
+                                      value: progressValue,
+                                      width: 0.2,
+                                      sizeUnit: GaugeSizeUnit.factor,
+                                      enableAnimation: true,
+                                      animationDuration: 100,
+                                      animationType: AnimationType.linear,
+                                      cornerStyle: CornerStyle.startCurve,
+                                      gradient: const SweepGradient(
+                                          colors: <Color>[
+                                            Color(0xFF00a9b5),
+                                            Color(0xFFa4edeb)
+                                          ],
+                                          stops: <double>[
+                                            0.25,
+                                            0.75
+                                          ])),
+                                  MarkerPointer(
                                     value: progressValue,
-                                    width: 0.2,
-                                    sizeUnit: GaugeSizeUnit.factor,
+                                    markerType: MarkerType.circle,
                                     enableAnimation: true,
                                     animationDuration: 100,
                                     animationType: AnimationType.linear,
-                                    cornerStyle: CornerStyle.startCurve,
-                                    gradient: const SweepGradient(
-                                        colors: <Color>[
-                                          Color(0xFF00a9b5),
-                                          Color(0xFFa4edeb)
-                                        ],
-                                        stops: <double>[
-                                          0.25,
-                                          0.75
-                                        ])),
-                                MarkerPointer(
-                                  value: progressValue,
-                                  markerType: MarkerType.circle,
-                                  enableAnimation: true,
-                                  animationDuration: 100,
-                                  animationType: AnimationType.linear,
-                                  color: const Color(0xFF87e8e8),
-                                )
-                              ],
-                              annotations: <GaugeAnnotation>[
-                                GaugeAnnotation(
-                                    positionFactor: 0,
-                                    widget: Text(
-                                        progressValue.toStringAsFixed(0) + '%',
-                                        style: TextStyle(
-                                            color: Colors.black.withOpacity(.6),
-                                            fontFamily: "nunito",
-                                            fontSize: 27.0)))
-                              ]),
-                        ])),
-                  ),
-                ],
+                                    color: const Color(0xFF87e8e8),
+                                  )
+                                ],
+                                annotations: <GaugeAnnotation>[
+                                  GaugeAnnotation(
+                                      positionFactor: 0,
+                                      widget: Text(
+                                          progressValue.toStringAsFixed(0) + '%',
+                                          style: TextStyle(
+                                              color: Colors.black.withOpacity(.6),
+                                              fontFamily: "nunito",
+                                              fontSize: 27.0)))
+                                ]),
+                          ])),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -841,14 +863,17 @@ class _NeuHomeState extends State<NeuHome> {
                       SizedBox(
                         height: 10.0,
                       ),
-                      Text(
-                        'Remote Locking',
-                        style: TextStyle(
-                          color: Colors.black.withOpacity(.5),
-                          //letterSpacing: 1,
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "nunito",
+                      GestureDetector(
+                        onTap: () => _gotoLockink(),
+                        child: Text(
+                          'Remote Locking',
+                          style: TextStyle(
+                            color: Colors.black.withOpacity(.5),
+                            //letterSpacing: 1,
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "nunito",
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -889,7 +914,7 @@ class _NeuHomeState extends State<NeuHome> {
                             child: NeumorphicSwitch(
                               value: isLocked,
                               style: NeumorphicSwitchStyle(
-                                activeTrackColor: Colors.cyan,
+                                activeTrackColor: (progressValueshow > 40) ? Colors.cyan : Color(0xFFd51a00),
                               ),
                               onChanged: (value) {
                                 (isLocked) ? isAuthenticated = false : null;
@@ -956,14 +981,17 @@ class _NeuHomeState extends State<NeuHome> {
                       SizedBox(
                         height: 10.0,
                       ),
-                      Text(
-                        'Security Lightning',
-                        style: TextStyle(
-                          color: Colors.black.withOpacity(.5),
-                          //letterSpacing: 1,
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "nunito",
+                      GestureDetector(
+                        onTap: () => _gotoLightnig(),
+                        child: Text(
+                          'Security Lightning',
+                          style: TextStyle(
+                            color: Colors.black.withOpacity(.5),
+                            //letterSpacing: 1,
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "nunito",
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -1004,7 +1032,7 @@ class _NeuHomeState extends State<NeuHome> {
                             child: NeumorphicSwitch(
                               value: isOn,
                               style: NeumorphicSwitchStyle(
-                                activeTrackColor: Colors.cyan,
+                                activeTrackColor: (progressValueshow > 40) ? Colors.cyan : Color(0xFFd51a00),
                               ),
                               onChanged: (value) {
                                 isOn = value;
@@ -1052,14 +1080,17 @@ class _NeuHomeState extends State<NeuHome> {
                       SizedBox(
                         height: 10.0,
                       ),
-                      Text(
-                        'Sound Alarm',
-                        style: TextStyle(
-                          color: Colors.black.withOpacity(.5),
-                          //letterSpacing: 1,
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "nunito",
+                      GestureDetector(
+                        onTap: () => _gotoAlarm(),
+                        child: Text(
+                          'Sound Alarm',
+                          style: TextStyle(
+                            color: Colors.black.withOpacity(.5),
+                            //letterSpacing: 1,
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "nunito",
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -1100,7 +1131,7 @@ class _NeuHomeState extends State<NeuHome> {
                             child: NeumorphicSwitch(
                               value: isActived,
                               style: NeumorphicSwitchStyle(
-                                activeTrackColor: Colors.cyan,
+                                activeTrackColor: (progressValueshow > 40) ? Colors.cyan : Color(0xFFd51a00),
                               ),
                               onChanged: (value) {
                                 setState(() {
@@ -1144,14 +1175,17 @@ class _NeuHomeState extends State<NeuHome> {
                       SizedBox(
                         height: 10.0,
                       ),
-                      Text(
-                        'Video Streaming',
-                        style: TextStyle(
-                          color: Colors.black.withOpacity(.5),
-                          //letterSpacing: 1,
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "nunito",
+                      GestureDetector(
+                        onTap: () => _gotoCamera(),
+                                              child: Text(
+                          'Video Streaming',
+                          style: TextStyle(
+                            color: Colors.black.withOpacity(.5),
+                            //letterSpacing: 1,
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "nunito",
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -1188,7 +1222,7 @@ class _NeuHomeState extends State<NeuHome> {
                           ),
                           Icon(
                             Icons.double_arrow_rounded,
-                            color: Colors.cyan,
+                            color: (progressValueshow > 40) ? Colors.cyan : Color(0xFFd51a00),
                           )
                         ],
                       )
